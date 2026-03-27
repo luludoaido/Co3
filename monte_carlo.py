@@ -1,50 +1,7 @@
 import math
 import random
 import copy
-
-
-class Cube:
-    def __init__(self, a: float, x: float = 0.0, y: float = 0.0, z: float = 0.0):
-        self.a = float(a)
-        self.x = float(x)
-        self.y = float(y)
-        self.z = float(z)
-
-    def half_size(self):
-        s = self.a / 2.0
-        return s, s, s
-
-    def volume(self):
-        return self.a ** 3
-
-
-class Sphere:
-    def __init__(self, r: float, x: float = 0.0, y: float = 0.0, z: float = 0.0):
-        self.r = float(r)
-        self.x = float(x)
-        self.y = float(y)
-        self.z = float(z)
-
-    def half_size(self):
-        return self.r, self.r, self.r
-
-    def volume(self):
-        return (4.0 / 3.0) * math.pi * (self.r ** 3)
-
-
-class Pyramid:
-    def __init__(self, b: float, h: float, x: float = 0.0, y: float = 0.0, z: float = 0.0):
-        self.b = float(b)
-        self.h = float(h)
-        self.x = float(x)
-        self.y = float(y)
-        self.z = float(z)
-
-    def half_size(self):
-        return self.b / 2.0, self.b / 2.0, self.h * 3.0 / 4.0
-
-    def volume(self):
-        return (1.0 / 3.0) * (self.b ** 2) * self.h
+from base_math_objfunction_updated import Cube, Sphere, Pyramid, objective
 
 # ------------------------------------------------------------
 # FIXED collision function
