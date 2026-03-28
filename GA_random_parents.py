@@ -22,53 +22,57 @@ W, D, H = 38.0, 28.4, 38.0
 def fitness_func(ga_instance,solution,solution_idx):
     objs_copy = copy.deepcopy(objects)
     for i, obj in enumerate(objs_copy):
-        obj.x = solution[2*i]
-        obj.y = solution[2*i+1]
-        obj.z = obj.half_size[2]
+        obj.x = solution[3*i]
+        obj.y = solution[3*i+1]
+        obj.z = solution[3*i+2]
     return - objective(objs_copy,W,D,H,500)
 
-fitness_function = fitness_func
+def genetic_algorithm():
 
-num_generations = 2000
-num_parents_mating = 4
+    fitness_function = fitness_func
 
-sol_per_pop = 80
-num_genes = len(objects) * 2 # for x , y axis  
+    num_generations = 2000
+    num_parents_mating = 4
 
-init_range_low = 0.5
-init_range_high = 28
+    sol_per_pop = 80
+    num_genes = len(objects) * 3 # for x , y axis  
 
-parent_selection_type = "sss"
-keep_parents = 1
+    init_range_low = 0.5
+    init_range_high = 28
 
-crossover_type = "random"
+    parent_selection_type = "sss"
+    keep_parents = 1
 
-mutation_type = "single_point"
-mutation_percent_genes = 10
+    crossover_type = "single_point"
 
-ga_instance = pygad.GA(num_generations=num_generations,
-                       num_parents_mating=num_parents_mating,
-                       fitness_func=fitness_function,
-                       sol_per_pop=sol_per_pop,
-                       num_genes=num_genes,
-                       init_range_low=init_range_low,
-                       init_range_high=init_range_high,
-                       parent_selection_type=parent_selection_type,
-                       keep_parents=keep_parents,
-                       crossover_type=crossover_type,
-                       mutation_type=mutation_type,
-                       mutation_percent_genes=mutation_percent_genes)
+    mutation_type = "random"
+    mutation_percent_genes = 10
 
-ga_instance.run()
+    ga_instance = pygad.GA(num_generations=num_generations,
+                        num_parents_mating=num_parents_mating,
+                        fitness_func=fitness_function,
+                        sol_per_pop=sol_per_pop,
+                        num_genes=num_genes,
+                        init_range_low=init_range_low,
+                        init_range_high=init_range_high,
+                        parent_selection_type=parent_selection_type,
+                        keep_parents=keep_parents,
+                        crossover_type=crossover_type,
+                        mutation_type=mutation_type,
+                        mutation_percent_genes=mutation_percent_genes)
 
-solution, solution_fitness, solution_idx = ga_instance.best_solution()
-print("Parameters of the best solution : {solution}".format(solution=solution))
-print("Fitness value of the best solution = {solution_fitness}".format(solution_fitness=solution_fitness))
+    ga_instance.run()
 
-import matplotlib.pyplot as plt
+    solution, solution_fitness, solution_idx = ga_instance.best_solution()
+    print("Parameters of the best solution : {solution}".format(solution=solution))
+    print("Fitness value of the best solution = {solution_fitness}".format(solution_fitness=solution_fitness))
 
-plt.plot(ga_instance.best_solutions_fitness)
-plt.xlabel("Generation")
-plt.ylabel("Fitness")
-plt.title("Fitness Verlauf")
-plt.show()
+    return solution, solution_fitness
+
+#import matplotlib.pyplot as plt
+
+#plt.plot(ga_instance.best_solutions_fitness)
+#plt.xlabel("Generation")
+#plt.ylabel("Fitness")
+#plt.title("Fitness Verlauf")
+#plt.show()
