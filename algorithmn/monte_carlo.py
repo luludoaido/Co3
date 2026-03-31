@@ -1,7 +1,7 @@
 import math
 import random
 import copy
-from base_math_objfunction_updated import Cube, Sphere, Pyramid, objective
+from base.create_shapes import Cube, Sphere, Pyramid, objective
 
 # ------------------------------------------------------------
 # FIXED collision function
@@ -110,12 +110,13 @@ def perturb_object(o, W, D, H, step=2.0):
     new_o.z = min(max(new_o.z, sz), H - sz)
 
     return new_o
+ 
 
 
 # ------------------------------------------------------------
 # Monte Carlo optimizer
 # ------------------------------------------------------------
-def monte_carlo_optimization(objects, W, D, H, lam=500, iterations=10000, step=2.0, seed=42):
+def monte_carlo_optimization(objects, W=38.0, D=28.4, H=38.0 , lam=500, iterations=10000, step=2.0, seed=42):
     random.seed(seed)
 
     # start from random placement
@@ -150,32 +151,33 @@ def monte_carlo_optimization(objects, W, D, H, lam=500, iterations=10000, step=2
 
         history.append(best_score)
 
-    return best, best_score, history
+    # best = object_to_list(best)    # coordinate to list. later for creating super parents. 
+
+    return best, best_score #, history da nur die besten appended --> nicht die volle history
 
 
 # ------------------------------------------------------------
 # Example run
 # ------------------------------------------------------------
-if __name__ == "__main__":
-    objects = [
-        Cube(a=5.0),
-        Cube(a=3.0),
-        Sphere(r=3.0),
-        Sphere(r=2.0),
-        Pyramid(b=4.0, h=6.0),
-        Pyramid(b=3.0, h=4.0),
-    ]
+#if __name__ == "__main__":
+#    objects = [
+#        Cube(a=5.0),
+#        Cube(a=3.0),
+#        Sphere(r=3.0),
+#        Sphere(r=2.0),
+#        Pyramid(b=4.0, h=6.0),
+#        Pyramid(b=3.0, h=4.0),
+#    ]
 
-    W, D, H = 38.0, 28.4, 38.0
+#    W, D, H = 38.0, 28.4, 38.0
 
-    best_objects, best_score, history = monte_carlo_optimization(
-        objects, W, D, H,
-        lam=500,
-        iterations=10000,
-        step=2.0,
-        seed=42
-    )
+#    best_objects, best_score = monte_carlo_optimization(
+#        objects
+#    )
 
-    print(f"Best objective value: {best_score:.2f}")
-    for i, o in enumerate(best_objects):
-        print(f"Object {i+1}: x={o.x:.2f}, y={o.y:.2f}, z={o.z:.2f}")
+#    print(f"Best objective value: {best_score:.2f}")
+#    print(best_objects)
+#    for i, o in enumerate(best_objects):
+#        print(f"Object {i+1}: x={o.x:.2f}, y={o.y:.2f}, z={o.z:.2f}")
+
+#best_objects

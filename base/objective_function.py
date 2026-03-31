@@ -21,7 +21,7 @@ if > 0.0 = collision
 ------------------------------------------------------------
 """
 import math
-from create_shapes import Sphere
+from base.create_shapes import Sphere #<------------- what is this for?
 
 def collision (obj1, obj2):
     #sphere + sphere

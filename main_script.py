@@ -7,10 +7,11 @@ Main Program that runs all the other programs
 @author: Luka Ilisevic
 """
 
-from optimizer_SA import simulated_annealing
+from algorithmn.optimizer_SA import simulated_annealing
 from shape_visualization_3D import animate_history
 from create_shapes import Cube, Sphere, Pyramid
 from objective_function import objective
+import matplotlib.pyplot as plt
 
 def plot_scores(scores):
     fig = plt.figure(figsize=(8, 5))

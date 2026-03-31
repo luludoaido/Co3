@@ -98,8 +98,8 @@ def simulated_annealing(objects, objective,  W = 38.0, D = 28.4, H = 38.0,
         if i % 100 == 0:
             print(f"Iteration {i}, Temperature {t:.3f}, Best Evaluation {best_eval:.5f}")
         
-        scores.append(best_eval)
-        if i % 20 == 0:
-            history.append(copy.deepcopy(current))
+        #scores.append(best_eval)
+        #if i % 20 == 0: # -------------------------------------------------------->why?
+        #    history.append(copy.deepcopy(current))
         
-    return best, best_eval, scores, history
+    return best, best_eval #, scores, history  first without! 
