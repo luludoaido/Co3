@@ -152,7 +152,7 @@ def monte_carlo_optimization(objects, W=38.0, D=28.4, H=38.0 , lam=500, iteratio
 
         history.append(best_score)
         
-        return best, best_score #, history da nur die besten appended --> nicht die volle history
+    return best, best_score #, history da nur die besten appended --> nicht die volle history
 
 
 # ------------------------------------------------------------

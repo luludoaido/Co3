@@ -60,7 +60,7 @@ def perturb_layout(layout, W = 38.0, D = 28.4, H = 38.0, step = 2.0):
     return candidate
     
 def simulated_annealing(objects, objective,  W = 38.0, D = 28.4, H = 38.0, 
-                        lam = 500, n_iterations = 1000, step_size = 2.0, temp = 10):
+                        lam = 500, n_iterations = 1000, step_size = 2.0, temp = 10, return_trace=False):
     
     # Random layout
     current = random_layout(objects, W, D, H)
@@ -102,4 +102,7 @@ def simulated_annealing(objects, objective,  W = 38.0, D = 28.4, H = 38.0,
         #if i % 20 == 0: # -------------------------------------------------------->why?
         #    history.append(copy.deepcopy(current))
         
-    return best, best_eval #, scores, history  first without! 
+    if return_trace:
+        return best, best_eval, scores, history
+
+    return best, best_eval 

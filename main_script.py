@@ -8,9 +8,9 @@ Main Program that runs all the other programs
 """
 
 from algorithmn.optimizer_SA import simulated_annealing
-from shape_visualization_3D import animate_history
-from create_shapes import Cube, Sphere, Pyramid
-from objective_function import objective
+from utils.shape_visualization_3D import animate_history
+from base.create_shapes import Cube, Sphere, Pyramid
+from base.objective_function import objective
 import matplotlib.pyplot as plt
 
 def plot_scores(scores):
@@ -64,7 +64,8 @@ best, best_eval, scores, history = simulated_annealing(
     lam=5000,
     n_iterations=5000,
     step_size=4.0,
-    temp=30.0
+    temp=30.0,
+    return_trace=True
 )
 
 anim = animate_history(history, W, D, H, interval=100)
