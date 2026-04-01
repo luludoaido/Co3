@@ -60,7 +60,7 @@ def perturb_layout(layout, W = 38.0, D = 28.4, H = 38.0, step = 2.0):
     return candidate
     
 def simulated_annealing(objects, objective,  W = 38.0, D = 28.4, H = 38.0, 
-                        lam = 500, n_iterations = 1000, step_size = 2.0, temp = 10, return_trace=False):
+                        lam = 50000, n_iterations = 10000, step_size = 5.0, temp = 100, return_trace=False):
     
     # Random layout
     current = random_layout(objects, W, D, H)
@@ -74,7 +74,7 @@ def simulated_annealing(objects, objective,  W = 38.0, D = 28.4, H = 38.0,
     
     for i in range(n_iterations):
         # Gradually decrease temperature
-        t = temp * (0.995 ** i)
+        t = temp * (0.999 ** i)
         # Generate candidate soluation
         
         candidate = perturb_layout(current, W, D, H, step_size)

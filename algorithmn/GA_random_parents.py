@@ -38,7 +38,7 @@ def fitness_func(ga_instance, solution, solution_idx):
     """
     objs_copy = converting_in_object(objects, solution)
 
-    return - objective(objs_copy,W,D,H,500)
+    return - objective(objs_copy,W,D,H,50000)
 
 def genetic_algorithm(initial_population = None):
     """

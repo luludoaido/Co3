@@ -117,7 +117,7 @@ def perturb_object(o, W, D, H, step=2.0):
 # ------------------------------------------------------------
 # Monte Carlo optimizer
 # ------------------------------------------------------------
-def monte_carlo_optimization(objects, W=38.0, D=28.4, H=38.0 , lam=500, iterations=10000, step=2.0):
+def monte_carlo_optimization(objects, W=38.0, D=28.4, H=38.0 , lam=50000, iterations=10000, step=5.0):
     #random.seed(seed)
 
     # start from random placement
