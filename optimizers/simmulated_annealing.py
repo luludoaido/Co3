@@ -9,25 +9,7 @@ simulated annealing program
 import math
 import random
 import copy
-
-""" 
-5.0 Random placement of objects in space with random_pos and track placement with random_layout
-"""
-
-def random_pos(o, W = 38.0, D = 28.4, H = 38.0):
-    sx, sy, sz = o.half_size()
-    x = random.uniform(sx, max(sx+0.01, W-sx))
-    y = random.uniform(sy, max(sy+0.01, D-sy))
-    z = random.uniform(sz, max(sz+0.01, H-sz))
-    return (x, y, z)
-
-def random_layout(objects, W = 38.0, D = 28.4, H = 38.0):
-    layout = copy.deepcopy(objects)
-    for o in layout:
-        o.x, o.y, o.z = random_pos(o, W, D, H)
-    return layout
-
-
+from model.initialization import random_layout
 
 """
 6.0 Integrate into simulated annealing algorithm (using Michelle's perturb_objects function to change position)

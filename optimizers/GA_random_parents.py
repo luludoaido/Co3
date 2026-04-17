@@ -1,6 +1,6 @@
 import pygad
 import copy
-from model.base_math_objfunction_updated import objective
+from model.objective_function import objective
 from data_input.metadata import objects, W, D, H # <-----------------------------should find another solutions.
 
 def converting_in_object(objects, list_coordination):
@@ -38,7 +38,7 @@ def fitness_func(ga_instance, solution, solution_idx):
     """
     objs_copy = converting_in_object(objects, solution)
 
-    return - objective(objs_copy,W,D,H,50000)
+    return - objective(objs_copy,W,D,H,1000)
 
 def genetic_algorithm(initial_population = None):
     """

@@ -17,7 +17,6 @@ in the context of a 3D packing optimization problem.
 # --------------- Visualizing Spatial Arrangement in 3D -----------------------
 
 import math
-import random
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -190,13 +189,6 @@ def visualize_objects(objects, W, D, H):
 # -------------------------------------------------------------
 # 6. Animation of geometric shapes
 # -------------------------------------------------------------
-
-def random_pos(o, W, D, H):
-    sx, sy, sz = o.half_size()
-    x = random.uniform(sx, W - sx)
-    y = random.uniform(sy, D - sy)
-    z = random.uniform(sz, H - sz)
-    return (x, y, z)
 
 def draw_layout(axes, objects, W, D, H, title="3D Printer Packing Visualization"):
     axes.clear()

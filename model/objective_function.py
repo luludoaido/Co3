@@ -8,7 +8,7 @@ This defines the objective function and the physical space that is being used
 """
 
 """
-2. Collision Detection
+1. Collision Detection
 we need to check if two objects overlap. the method how we do 
 that depends on the shape combination.
 
@@ -21,9 +21,9 @@ if > 0.0 = collision
 ------------------------------------------------------------
 """
 import math
-from model.shapes import Sphere #<------------- what is this for?
+from model.shapes import Sphere # included for sphere-specific collision detection
 
-def collision (obj1, obj2):
+def collision(obj1, obj2):
     #sphere + sphere
     #Two spheres overlap if the distance between their centers
     #is less than the sum of their radii
@@ -52,7 +52,7 @@ def collision (obj1, obj2):
 
 
 """
-3. Objective Function
+2. Objective Function
 What we want to do: 
 - Minimize the volume occupied by 3D objects in a theoretical 3D printer volume
     
@@ -66,10 +66,7 @@ Formula:
 The parameter lam (lambda) controls how strictly contraints are enforced. 
 Higher lam = algorithm prioritizes valid placements over minimizing empty space.
 
-A perfect solution has no constraint violations at all
-Penalty-Formulierung wird in studien gebracuht bei irregulären packing, 
-da man ein algorithmus keine Regeln versteht, macht man das verstosse hoche werte ergeben,
-weil wir das minimum wollen ist klar dases dann nicht sauber ist
+We will use high penalty values
 
 ------------------------------------------------------------
 """
