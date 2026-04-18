@@ -1,34 +1,8 @@
 import random
-import copy
-from model.objective_function import objective
+
 from model.initialization import random_layout
-
-
-# ------------------------------------------------------------
-# Deep copy helper
-# ------------------------------------------------------------
-def clone_objects(objs):
-    return copy.deepcopy(objs)
-
-
-# ------------------------------------------------------------
-# Small random move for one object
-# ------------------------------------------------------------
-def perturb_object(o, W, D, H, step=2.0):
-    new_o = copy.deepcopy(o)
-
-    new_o.x += random.uniform(-step, step)
-    new_o.y += random.uniform(-step, step)
-    new_o.z += random.uniform(-step, step)
-
-    # clamp inside box
-    sx, sy, sz = new_o.half_size()
-    new_o.x = min(max(new_o.x, sx), W - sx)
-    new_o.y = min(max(new_o.y, sy), D - sy)
-    new_o.z = min(max(new_o.z, sz), H - sz)
-
-    return new_o
- 
+from model.perturbation import perturb_object, clone_objects
+from model.objective_function import objective
 
 
 # ------------------------------------------------------------

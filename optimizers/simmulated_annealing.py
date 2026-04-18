@@ -8,62 +8,48 @@ simulated annealing program
 """
 import math
 import random
-import copy
+
 from model.initialization import random_layout
-
-"""
-6.0 Integrate into simulated annealing algorithm (using Michelle's perturb_objects function to change position)
-"""
-def perturb_object(o, W = 38.0, D = 28.4, H = 38.0, step = 2.0):
-    new_o = copy.deepcopy(o)
-    
-    # randomly move objects in x,y,z-direction
-    new_o.x += random.uniform(-step, step)
-    new_o.y += random.uniform(-step, step)
-    new_o.z += random.uniform(-step, step)
-    
-    # keep object inside the box
-    sx, sy, sz = new_o.half_size()
-    
-    new_o.x = min(max(new_o.x, sx), W - sx)
-    new_o.y = min(max(new_o.y, sy), D - sy)
-    new_o.z = min(max(new_o.z, sz), H - sz)
-    
-    return new_o
+from model.perturbation import perturb_object, clone_objects
+from model.objective_function import objective
 
 
-def perturb_layout(layout, W = 38.0, D = 28.4, H = 38.0, step = 2.0):
-    candidate = copy.deepcopy(layout)
-    
-    #choose one random object to move
-    idx = random.randint(0, len(candidate) - 1)
-    candidate[idx] = perturb_object(candidate[idx], W, D, H, step)
-    
-    return candidate
-    
-def simulated_annealing(objects, objective,  W = 38.0, D = 28.4, H = 38.0, 
+  
+def simulated_annealing(objects, W = 38.0, D = 28.4, H = 38.0, 
                         lam = 50000, n_iterations = 10000, step_size = 5.0, temp = 100, return_trace=False):
     
-    # Random layout
+#-----------------------------------------------------------------------------
+# Generating an initial solution
+#-----------------------------------------------------------------------------
     current = random_layout(objects, W, D, H)
     current_eval = objective(current, W, D, H, lam)
     
-    best = copy.deepcopy(current)
+    best = clone_objects(current)
     best_eval = current_eval
     
     scores = [best_eval]
-    history = [copy.deepcopy(current)]
-    
+    history = [clone_objects(current)]
+
+#-----------------------------------------------------------------------------
+# Optimization Loop
+#-----------------------------------------------------------------------------
     for i in range(n_iterations):
-        # Gradually decrease temperature
+        # Cooling schedule (conservative)
         t = temp * (0.999 ** i)
-        # Generate candidate soluation
         
-        candidate = perturb_layout(current, W, D, H, step_size)
+        # Generate candidate solution
+        candidate = clone_objects(current)
+        
+        idx = random.randint(0, len(candidate) - 1)
+        candidate[idx] = perturb_object(candidate[idx], W, D, H, step_size)
+        
         candidate_eval = objective(candidate, W, D, H, lam)
         
+#-----------------------------------------------------------------------------
+# Defining the acceptance rule, allowing for some worse cases at high temps
+#-----------------------------------------------------------------------------
         delta = candidate_eval - current_eval
-
+        
         if delta < 0:
             current = candidate
             current_eval = candidate_eval
@@ -71,19 +57,22 @@ def simulated_annealing(objects, objective,  W = 38.0, D = 28.4, H = 38.0,
             if random.random() < math.exp(-delta / t):
                 current = candidate
                 current_eval = candidate_eval
-
-        if current_eval < best_eval:
-                best = copy.deepcopy(current)
-                best_eval = current_eval
                 
-        # Optional: print progress
+#-----------------------------------------------------------------------------
+# Tracking best solution 
+#-----------------------------------------------------------------------------
+        if current_eval < best_eval:
+            best = clone_objects(current)
+            best_eval = current_eval
+                
+        # Optional progress print
         if i % 100 == 0:
             print(f"Iteration {i}, Temperature {t:.3f}, Best Evaluation {best_eval:.5f}")
         
-        #scores.append(best_eval)
-        #if i % 20 == 0: # -------------------------------------------------------->why?
-        #    history.append(copy.deepcopy(current))
         
+#-----------------------------------------------------------------------------
+# Return results
+#-----------------------------------------------------------------------------       
     if return_trace:
         return best, best_eval, scores, history
 

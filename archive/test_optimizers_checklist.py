@@ -27,7 +27,7 @@ mc_best, mc_score = monte_carlo_optimization(
 print("Monte Carlo score:", mc_score)
 
 sa_best, sa_score = simulated_annealing(
-    objects, objective, W=W, D=D, H=H, lam=lam,
+    objects, W=W, D=D, H=H, lam=lam,
     n_iterations=500, step_size=3.0, temp=30.0
 )
 print("Simulated Annealing score:", sa_score)
@@ -80,7 +80,7 @@ repeat_test(
 
 repeat_test(
     "Simulated Annealing",
-    lambda: simulated_annealing(objects, objective, W=W, D=D, H=H, lam=lam, n_iterations=500, step_size=3.0, temp=30.0),
+    lambda: simulated_annealing(objects, W=W, D=D, H=H, lam=lam, n_iterations=500, step_size=3.0, temp=30.0),
 )
 
 repeat_test(
