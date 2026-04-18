@@ -3,7 +3,8 @@ import random
 from model.initialization import random_layout
 from model.perturbation import perturb_object, clone_objects
 from model.objective_function import objective
-from data_input.parameters import W, D, H, LAM, MC_iterations, MC_step
+from data_input.metadata import W, D, H
+from data_input.parameters import LAM, MC_iterations, MC_step
 
 
 # ------------------------------------------------------------

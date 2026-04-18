@@ -61,7 +61,7 @@ def simulated_annealing(objects, W = W, D = D, H = H,
                 current_eval = candidate_eval
                 
 #-----------------------------------------------------------------------------
-# Tracking best solution 
+# Tracking best solution
 #-----------------------------------------------------------------------------
         if current_eval < best_eval:
             best = clone_objects(current)

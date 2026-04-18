@@ -8,7 +8,7 @@ Optimizer Testing
 from model.shapes import Cube, Sphere, Pyramid
 from model.objective_function import objective
 from optimizers.monte_carlo import monte_carlo_optimization
-from optimizers.simmulated_annealing import simulated_annealing
+from optimizers.simulated_annealing import simulated_annealing
 from optimizers.GA_random_parents import genetic_algorithm
 
 objects = [

@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-
-CO3 Bioinspired Algorithms
-
-3D Visualization of Packing Problem
-
 This script visualizes the spatial arrangement of 3D objects (cubes, spheres,
 and pyramids) within a fixed printer volume. Objects are assigned positions
 in 3D space and rendered using matplotlib.
