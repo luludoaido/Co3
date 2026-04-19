@@ -63,5 +63,5 @@ All algorithms operate on the same objective function, while taking different ap
 They are evaluated through repeated experiments using pipeline.py:
 - runs each algorithm multiple times
 - records objective scores and runtime
-- generates visualtizations of object placement
+- generates visualizations of object placement
 - exports results for further analysis
